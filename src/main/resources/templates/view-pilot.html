@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/wwww.thymeleaf.org">
+<head>
+    <title>Find Pilot</title>
+    
+</head>
+<body th:switch="${pilot}">
+    <h3 th:case="null">Maaf pilot tidak ditemukan</h3>
+    <div th:case="*">
+            <h3 th:text=" 'Pilot License number: '+ ${pilot.licenseNumber}"></h3>
+            <h3 th:text=" 'Name: ' +${pilot.name}"></h3>
+            <h3 th:text=" 'Fly-hour: '+${pilot.flyHour}"></h3>
+            <hr>
+            <div th:each="pilotFlight : ${pilot.getPilotFlight()}">
+                <p th:text="'Flight number: '+ ${pilotFlight.getFlightNumber()}"></p>
+                <p th:text="'Flight from '   + ${pilotFlight.getOrigin()} + ' to ' + ${pilotFlight.getDestination()}"></p>
+                <p th:text="'Flight date: '+ ${pilotFlight.getTime()}"></p>
+                <hr>
+            </div>
+            
+    </div>
+    
+    <a th:href="@{/flight/add/{licenseNumber}(licenseNumber=${pilot.licenseNumber})}">Add flight</a>
+    <a th:href="@{/pilot/delete/{licenseNumber}(licenseNumber=${pilot.licenseNumber})}">Delete pilot</a>
+    <a th:href="@{/pilot/update/(licenseNumber=${pilot.licenseNumber})}">Update pilot</a>
+
+    <!-- <form th:action="@{/pilot/delete/{licenseNumber}(licenseNumber=${pilot.licenseNumber})}" method="post">
+        <button type="submit">Delete</button>
+    </form> -->
+    
+    
+</body>
+</html>
