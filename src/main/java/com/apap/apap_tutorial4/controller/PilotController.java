@@ -51,7 +51,6 @@ public class PilotController {
     @RequestMapping(value="/pilot/delete/{licenseNumber}")
     public String deletePilot(@PathVariable(value="licenseNumber", required=true) String licenseNumber, Model model){
         String response = "Gagal menghapus data pilot";
-        System.out.println("masuk phak ekho bos");
             if (pilotService.removePilot(licenseNumber)){
             System.out.println("berhasil bos");
             response ="Berhasil menghapus data pilot";
