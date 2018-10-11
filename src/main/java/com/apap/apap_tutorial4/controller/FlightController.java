@@ -31,20 +31,23 @@ public class FlightController {
         return "addFlight";
     }
 
-    @RequestMapping(value = "/flight/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/flight/add", method = RequestMethod.POST, params={"addRow"})
     private String addFlightSubmit(@ModelAttribute FlightModel flight) {
         flightService.addFlight(flight);
         return "add";
     }
+    // @RequestMapping(value="/flight/add", method=RequestMethod.POST, params={"addRow"})
+    // public String addRow(@RequestParam(value="flightNumber") String flightNumber, @ModelAttribute PilotModel pilot, Model model){
+    //     pilot.getPilotFlight().add(new FlightModel());
+    //     return "addFlight";
+    // }
 
-    @RequestMapping(value="/flight/delete/{flightNumber}")
-    public String deleteFlight(@PathVariable(value="flightNumber", required=true) String flightNumber, Model model){
-        String response = "Gagal menghapus data pilot";
-        System.out.println("masuk phak ekho bos");
-            if (flightService.removeFlight(flightNumber)){
-            System.out.println("berhasil bos");
-            response ="Berhasil menghapus data";
-        }
+    @RequestMapping(value="/flight/delete", method=RequestMethod.POST)
+    public String deleteFlight(@ModelAttribute PilotModel pilot, Model model){
+        String response ="Berhasil menghapus data";
+        for(FlightModel flight: pilot.getPilotFlight()){
+            flightService.removeFlight(flight.getFlightNumber());
+        } 
         model.addAttribute("response", response);
         return "deleteSuccess";
     }

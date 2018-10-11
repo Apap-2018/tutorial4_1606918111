@@ -45,7 +45,6 @@ public class PilotController {
         PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
         model.addAttribute("pilot", pilot);
         return "view-pilot";
-
     }
 
     @RequestMapping(value="/pilot/delete/{licenseNumber}")
