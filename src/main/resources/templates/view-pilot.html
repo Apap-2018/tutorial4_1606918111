@@ -15,14 +15,15 @@
                 <h3 th:text=" 'Name: ' +${pilot.name}"></h3>
                 <h3 th:text=" 'Fly-hour: '+${pilot.flyHour}"></h3>
                 <h3 th:text="${pilot.flyHour} >=100 ? 'Status: Pilot Senior' : 'Status: Pilot Junior' "></h3>
-                <form th:action="@{/pilot/update} + ${pilot.id}">
-                    <button type="submit">Update Pilot</button>
+                
+                <form th:action="@{/pilot/update/} + ${pilot.licenseNumber}">
+                    <button type="submit" >Update Pilot</button>
                 </form>
-                <form th:action="@{/pilot/delete} + ${pilot.id}">
+                <form th:action="@{/pilot/delete/} + ${pilot.licenseNumber}">
                     <button type="submit">Delete Pilot</button>
                 </form>
                 <br>
-
+               
                 <form th:action="@{/flight/delete}" th:object="${pilot}" method="POST">
                     <input type="hidden" th:value="*{id}" />
                     <caption>Flights</caption>

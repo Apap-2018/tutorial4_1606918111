@@ -59,8 +59,8 @@ public class PilotController {
     }
 
     //redirect form
-    @RequestMapping(value="/pilot/update", method=RequestMethod.GET)
-    public String update(@RequestParam(value="licenseNumber") String licenseNumber, Model model){
+    @RequestMapping(value="/pilot/update/{licenseNumber}", method=RequestMethod.GET)
+	public String update(@PathVariable(value = "licenseNumber") String licenseNumber, Model model){
         model.addAttribute("pilot", pilotService.getPilotDetailByLicenseNumber(licenseNumber));
         return "updatePilot";
 
